@@ -1,1 +1,1 @@
-maze
+clear()
