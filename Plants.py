@@ -7,4 +7,30 @@ def farm_maze():
 			use_item(Items.Fertilizer)
 		else:
 			break
-	navigate_maze()
+	maze_solve()
+def farm_pumpkin():
+	initial_plant(Items.Pumpkin)
+	pumpkin_measure()
+
+def farm_sunflower():
+	initial_plant(Items.Power)
+	sunflower_measure()
+
+def farm_carrots():
+	initial_plant(Items.Carrot)
+
+def farm_wood():
+	initial_plant(Items.Wood)
+	farmgrid(Items.Wood)
+	
+def farm_cati():
+	initial_plant(Items.Cactus)
+	cactus_measure()
+	
+def farm_dino():
+	initial_plant(Items.Bones)
+	farmgrid(Items.Bones)
+	
+def farm_hay():
+	initial_plant(Items.Hay)
+	farmgrid(Items.Hay)

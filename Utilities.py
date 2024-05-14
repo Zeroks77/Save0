@@ -1,6 +1,9 @@
 def water():
 	if can_harvest() == False and get_water() < 1 and num_items(Items.Water_Tank) > 15:
 		use_item(Items.Water_Tank)
+def fertilize():
+	if can_harvest() == False  and num_items(Items.Fertilizer) > power(get_world_size(),3):
+		use_item(Items.Fertilizer)
 def harvest_item(Item):
 	if can_harvest():
 		harvest()
@@ -14,13 +17,13 @@ def initial_plant(Item):
 	while on_board_end() == False: 
 		plant_item(Item)		move_()
 	plant_item(Item)
+	move_to(0,0)
 	
 def power(num, exp ): 
 	res = num 
 	for i in range(exp -1):
 		res *= num	
-	return res	
-		
+	return res		
 def plant_item(Item):
 	water()
 	if Item == Items.Hay:
@@ -44,9 +47,18 @@ def plant_item(Item):
 			harvest()
 		if get_entity_type() == None and num_items(Items.Sunflower_Seed) > power(get_world_size(),2):
 			plant(Entities.Sunflower)
+	if Item == Items.Bones: 
+		if get_entity_type() != None and get_entity_type() != Entities.Dinosaur:
+			harvest()
+		if get_entity_type() == None and num_items(Items.Egg) > power(get_world_size(),2):
+			use_item(Items.Egg)
 			
-def woodgrid():	if (get_pos_x() % 2 == 0 and get_pos_y() % 2 == 1) or (get_pos_x() % 2 == 1 and get_pos_y() % 2 == 0) :
-		plant(Entities.Tree)	else:		plant(Entities.Bush)
+	if Item == Items.Cactus:
+		if get_entity_type() != None and get_entity_type() != Entities.Cactus:
+			harvest()
+		if get_entity_type() == None and num_items(Items.Cactus_Seed) > power(get_world_size(),2):
+			plant(Entities.Cactus)
+	water()
 		
 def farmgrid(item) : 	for i in range(get_world_size()):
 		for j in range(get_world_size()):
@@ -84,19 +96,6 @@ def on_board_end():
 	return get_pos_x() == world_size and get_pos_y() == world_size 
 
 
-def pumpkin_measure():
-	move_to(0,0)
-	check_positions = fill_with_board()
-	while len(check_positions) != 0:
-			if num_items(Items.Pumpkin_Seed) == 0:
-				check_positions = []
-				break
-			pos = check_positions.pop()
-			move_to(pos[0],pos[1])
-			if get_entity_type() == None:
-				check_positions.insert(0,pos)
-				plant(Entities.Pumpkin)
-	harvest_item(Items.Pumpkin)
 	
 def fill_with_board():
 	world_size = get_world_size()
@@ -106,29 +105,5 @@ def fill_with_board():
 			position_list.append([i,j])	return position_list
 	
 	
-def sunflower_measure():
-	most_pedals = [0,0,0] 
-	initial_plant(Items.Power)
-	harvested = False
-	move_to(0,0)
-	world_size = get_world_size()
-	seeds = num_items(Items.Sunflower_Seed)
-	check_positions = fill_with_board()
-	while not seeds < power(get_world_size(),2) * 2: 
-		if  len(check_positions) == 0:
-			move_to(most_pedals[0], most_pedals[1])
-			harvest_item(Items.Power)
-			most_pedals = [0,0,0] 
-			check_positions = fill_with_board()			
-			move_to(0,0)		pos = check_positions.pop()
-		move_to(pos[0],pos[1])
-		if can_harvest() == False:
-			check_positions.insert(0,pos)
-		a = measure()
-		if a != None and a > most_pedals[2]:
-			most_pedals = [get_pos_x(),get_pos_y(),a]
-		if a == None: 
-			move_to(0,0)
-			break
-		
+
 			

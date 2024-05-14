@@ -1,1 +1,1 @@
-move_to(0,0)
+clear()farm_maze()

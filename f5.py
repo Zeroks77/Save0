@@ -1,1 +1,1 @@
-navigate_maze()
+map_maze()

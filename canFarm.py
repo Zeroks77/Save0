@@ -33,7 +33,25 @@ def can_farm_carrot(want_to_have):
 		trade(Items.Carrot_Seed, get_seeds())
 		return True 	
 	return False
-	
+
+def can_farm_cacti(want_to_have):
+	if num_items(Items.Cactus) > want_to_have:
+		return False	
+	if num_items(Items.Cactus_Seed) > get_seeds():
+		return True
+	if num_items(Items.Gold) > want_to_have / 2:		
+		trade(Items.Cactus_Seed, get_seeds())
+		return True 	
+	return False
+def can_farm_dino(want_to_have):
+	if num_items(Items.Bones) > want_to_have:
+		return False	
+	if num_items(Items.Egg) > get_seeds():
+		return True
+	if num_items(Items.Cactus) > want_to_have / 2:		
+		trade(Items.Egg, get_seeds())
+		return True 	
+	return False
 def get_seeds():
 	worldsize = get_world_size() 
 	return power(worldsize, 2) * 5
