@@ -1,1 +1,2 @@
-clear()while True:	farm_dino()
+for unlock in Unlocks:
+	quick_print(unlock)

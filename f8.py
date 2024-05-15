@@ -1,10 +1,10 @@
+timed_reset()
 unlocks = [
+Unlocks.Grass,
 Unlocks.Speed,
-Unlocks.Plant, 
-Unlocks.Grass, 
 Unlocks.Expand,
+Unlocks.Plant, 
 Unlocks.Carrots,
-Unlocks.Watering,
 Unlocks.Trees,
 Unlocks.Pumpkins,
 Unlocks.Sunflowers,
@@ -13,4 +13,10 @@ Unlocks.Mazes,
 Unlocks.Cactus,
 Unlocks.Dinosaurs,
 Unlocks.Leaderboard
-]try_unlock()
+]
+upgraded_list = []
+for i in unlocks: 
+	upgraded_list.append([i,calc_all_cost(i)])
+while not unlock(Unlocks.Leaderboard):
+	farm() 
+timed_reset()
