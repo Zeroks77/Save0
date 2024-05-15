@@ -4,5 +4,6 @@ def maze_solve():
     dir = 0
     while get_entity_type() != Entities.Treasure:
         dir = (dir + dir_change[move(dirs[dir])]) % 4
+	harvest()
 
 

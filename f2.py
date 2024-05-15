@@ -1,1 +1,1 @@
-clear()farm_maze()
+clear()while True:	farm_dino()

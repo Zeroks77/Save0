@@ -104,12 +104,7 @@ def in_world(x):
 		return False	
 	return True		
 
-def create_list(n):
-	grid = []
-	for i in range(0,n,+1):
-		grid.append(None)
-	quick_print(i)
-	return grid
+
 
 def CreateGrid(n):
     grid = [] 

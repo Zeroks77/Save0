@@ -50,7 +50,7 @@ def plant_item(Item):
 	if Item == Items.Bones: 
 		if get_entity_type() != None and get_entity_type() != Entities.Dinosaur:
 			harvest()
-		if get_entity_type() == None and num_items(Items.Egg) > power(get_world_size(),2):
+		if get_entity_type() == Entities.Grass and num_items(Items.Egg) > power(get_world_size(),2):
 			use_item(Items.Egg)
 			
 	if Item == Items.Cactus:
