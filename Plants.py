@@ -1,26 +1,21 @@
 def farm_item(i,amount_of_this_item_needed):
-	tilled = False
 	while num_items(i) < amount_of_this_item_needed:	
 		if i == Items.Hay: 
-			tilled = farm_hay(tilled)
+			tilled = farm_hay()
 		elif i == Items.Wood:
-			tilled = farm_wood(tilled)
+			tilled = farm_wood()
 		elif i == Items.Carrot:
-			tilled = farm_carrots(tilled)
+			tilled = farm_carrots()
 		elif i == Items.Pumpkin:
-			tilled = farm_pumpkin(tilled)
+			tilled = farm_pumpkin()
 		elif i == Items.Gold:
-			tilled = farm_maze(tilled)
+			tilled = farm_maze()
 		elif i == Items.Cactus:
-			tilled = farm_cati(tilled)
+			tilled = farm_cati()
 		elif i == Items.Bones: 
-			tilled = farm_dino(tilled)
+			tilled = farm_dino()
 
-
-def farm_maze(tilled):
-	if tilled: 
-		tilled = False
-		untill_field()
+def farm_maze():
 	move_to(0,0)
 	plant(Entities.Bush)
 	minFertilizer = power(get_world_size(), 2) * 3
@@ -31,63 +26,37 @@ def farm_maze(tilled):
 		else:
 			break
 	maze_solve()
-	return tilled
-def farm_pumpkin(tilled):
-	if not tilled: 
-		tilled = True
-		till_field()
+def farm_pumpkin():
 	trade_item(Items.Pumpkin_Seed)
 	initial_plant(Items.Pumpkin)
 	pumpkin_measure()
-	return tilled
 
-def farm_sunflower(tilled):
-	if not tilled: 
-		tilled = True
-		till_field()
+def farm_sunflower():
 	trade_item(Items.Power)
 	initial_plant(Items.Power)
 	sunflower_measure()
-	return tilled
 	
-def farm_carrots(tilled):
-	if not tilled: 
-		tilled = True
-		till_field()
+def farm_carrots():
 	trade_item(Items.Carrot)
 	initial_plant(Items.Carrot)
 	farmgrid(Items.Carrot)
-	return tilled
 	
-def farm_wood(tilled):
+def farm_wood():
 	initial_plant(Items.Wood)
 	farmgrid(Items.Wood)
-	return tilled
 	
-def farm_cati(tilled):
-	if not tilled: 
-		tilled = True
-		till_field()
+def farm_cati():
 	trade_item(Items.Cactus)
 	initial_plant(Items.Cactus)
 	cactus_measure()
-	return tilled
 	
-def farm_dino(tilled):
-	if tilled: 
-		tilled = False
-		untill_field()
+def farm_dino():
 	trade_item(Items.Egg)
 	initial_plant(Items.Bones)
 	farmgrid(Items.Bones)
-	return tilled
 	
-def farm_hay(tilled):
-	if tilled: 
-		tilled = False
-		untill_field()
+def farm_hay():
 	if get_world_size() == 1: 
 		harvest_item(Items.Hay)
 	else:
 		farmgrid(Items.Hay)
-	return tilled

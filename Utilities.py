@@ -113,10 +113,14 @@ def trade_item(item):
 	cost_ = get_cost(trade_item[item])
 	world_size = get_world_size()
 	for item_ in cost_:
-		amount_of_this_item_needed = cost_[item_ ]
-		while amount_of_this_item_needed * world_size * 2 > num_items(item_ ):
+		amount_of_this_item_needed = cost_[item_ ] * power(world_size,2) 
+		if amount_of_this_item_needed <= num_items(item_ ):
+			trade(trade_item[item],amount_of_this_item_needed)
+			return
+		prep(item)
+		while amount_of_this_item_needed > num_items(item_ ):
 			farm_item(item_ , amount_of_this_item_needed)
 		
-	trade(trade_item[item],amount_of_this_item_needed * world_size * 2)
+	trade(trade_item[item],amount_of_this_item_needed)
 
 			

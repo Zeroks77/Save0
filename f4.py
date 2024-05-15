@@ -1,1 +1,1 @@
-untill_field()
+prep(Items.Hay)
