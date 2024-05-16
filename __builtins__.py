@@ -2,6 +2,396 @@ from typing import Any, Optional
 
 
 # -------------------------------------------------------------------------------
+class Items:
+    @property
+    def Carrot(self):
+        """Obtained by harvesting carrots."""
+        ...
+
+    @property
+    def Carrot_Seed(self):
+        """Used to grow carrots by calling `plant(Entities.Carrots)` on empty soil."""
+        ...
+
+    @property
+    def Empty_Tank(self):
+        """Empty tanks automatically turn into water tanks over time."""
+        ...
+
+    @property
+    def Fertilizer(self):
+        """Call `use_item(Items.Fertilizer)` to instantly grow the plant under the drone by 2s."""
+        ...
+
+    @property
+    def Gold(self):
+        """Found in treasure chests in mazes."""
+        ...
+
+    @property
+    def Hay(self):
+        """Obtained by cutting grass."""
+        ...
+
+    @property
+    def Power(self):
+        """Obtained by harvesting sunflowers. The drone automatically uses this to move twice as fast."""
+        ...
+
+    @property
+    def Pumpkin(self):
+        """Obtained when harvesting pumpkins."""
+        ...
+
+    @property
+    def Pumpkin_Seed(self):
+        """Used to grow pumpkins by calling `plant(Entities.Pumpkin)` on empty soil."""
+        ...
+
+    @property
+    def Sunflower_Seed(self):
+        """Used to grow sunflowers by calling `plant(Entities.Sunflower)` on empty soil."""
+        ...
+
+    @property
+    def Water_Tank(self):
+        """Used to water the ground by calling `use_item(Items.Water_Tank)`."""
+        ...
+
+    @property
+    def Wood(self):
+        """Obtained from bushes and trees."""
+        ...
+
+    @property
+    def Cactus(self):
+        """Obtained when harvesting sorted cacti."""
+        ...
+
+    @property
+    def Cactus_Seed(self):
+        """Used to grow cacti by calling `plant(Entities.Cactus)` on empty soil."""
+        ...
+
+    @property
+    def Egg(self):
+        """Call `use_item(Items.Egg)` to hatch a majestic dinosaur."""
+        ...
+
+    @property
+    def Bones(self):
+        """The bones of an ancient creature."""
+        ...
+
+
+# -------------------------------------------------------------------------------
+class Entities:
+    @property
+    def Grass(self):
+        """
+        Grows automatically. Harvest it to obtain `Items.Hay`.
+
+        Average seconds to grow: 0.5
+        Grows on: turf or soil
+        """
+        ...
+
+    @property
+    def Bush(self):
+        """
+        A small bush that drops `Items.Wood`.
+
+        Average seconds to grow: 4
+        Grows on: turf or soil
+        """
+        ...
+
+    @property
+    def Tree(self):
+        """
+        Trees drop more wood than bushes. They take longer to grow if other trees grow next to them.
+
+        Average seconds to grow: 7
+        Grows on: turf or soil
+        """
+        ...
+
+    @property
+    def Carrots(self):
+        """
+        Carrots!
+
+        Average seconds to grow: 6
+        Grows on: soil
+        """
+        ...
+
+    @property
+    def Pumpkin(self):
+        """
+        Pumpkins grow together when they are next to other fully grown pumpkins. About 1 in 5 pumpkins dies when it grows up.
+         When you harvest a pumpkin you get `Items.Pumpkin` equal to the number of pumpkins in the mega pumpkin cubed.
+
+        Average seconds to grow: 2
+        Grows on: soil
+        """
+        ...
+
+    @property
+    def Sunflower(self):
+        """
+        Sunflowers collect the power from the sun. Harvesting them will give you `Items.Power` equal to the number of sunflowers in the farm.
+         If you harvest a sunflower that doesn't have the maximum number of petals all the sunflowers will die.
+
+        Average seconds to grow: 5
+        Grows on: soil
+        """
+        ...
+
+    @property
+    def Cactus(self):
+        """
+        Cacti come in 10 different sizes. When harvested, all cacti on the field will be harvested. Only those that are in sorted order will drop `Items.Cactus`.
+
+        Average seconds to grow: 1
+        Grows on: soil
+        """
+        ...
+
+    @property
+    def Hedge(self):
+        """Part of the maze. Grow a maze by fertilizing a fully grown bush."""
+        ...
+
+    @property
+    def Treasure(self):
+        """A treasure that contains gold equal to the side length of the maze in which it is hidden. It can be harvested like a plant."""
+        ...
+
+    @property
+    def Dinosaur(self):
+        """
+        A majestic dinosaur. It moves around randomly but won't move for a while after being measured. Harvesting it harvests all adjacent dinosaurs of the same type and makes them drop `Items.Bones`.
+
+        Average seconds to grow: 0.2
+        Grows on: turf or soil
+        """
+        ...
+
+
+# -------------------------------------------------------------------------------
+class Grounds:
+    @property
+    def Turf(self):
+        """The default ground. Grass will automatically grow on it."""
+        ...
+
+    @property
+    def Soil(self):
+        """Calling `till()` turns the ground into this. Calling `till()` again changes it back to turf."""
+        ...
+
+
+# -------------------------------------------------------------------------------
+class Unlocks:
+    @property
+    def Trees(self):
+        """
+        Unlock: Unlocks trees.
+        Upgrade: Increases the yield of bushes and trees.
+        """
+        ...
+
+    @property
+    def Speed(self):
+        """Increases the speed of the drone."""
+        ...
+
+    @property
+    def Plant(self):
+        """Unlocks planting."""
+        ...
+
+    @property
+    def Loops(self):
+        """Unlocks a simple while loop."""
+        ...
+
+    @property
+    def Senses(self):
+        """The drone can see what's under it and where it is."""
+        ...
+
+    @property
+    def Expand(self):
+        """
+        Unlock: Expands the farm land and unlocks movement.
+        Upgrade: Expands the farm. This also clears the farm.
+        """
+        ...
+
+    @property
+    def Operators(self):
+        """Arithmetic, comparison and logic operators."""
+        ...
+
+    @property
+    def Pumpkins(self):
+        """
+        Unlock: Pumpkins!
+        Upgrade: Increases the yield of pumpkins and the cost of pumpkin seeds.
+        """
+        ...
+
+    @property
+    def Variables(self):
+        """Assign values to variables."""
+        ...
+
+    @property
+    def Functions(self):
+        """Define your own functions."""
+        ...
+
+    @property
+    def Watering(self):
+        """Water the plants to make them grow faster."""
+        ...
+
+    @property
+    def Carrots(self):
+        """
+        Unlock: Till the soil and plant carrots.
+        Upgrade: Increases the yield of carrots and the cost of carrot seeds.
+        """
+        ...
+
+    @property
+    def Lists(self):
+        """Use lists to store lots of values."""
+        ...
+
+    @property
+    def Costs(self):
+        """Allows access to the cost of things."""
+        ...
+
+    @property
+    def Fertilizer(self):
+        """Grow plants instantly."""
+        ...
+
+    @property
+    def Mazes(self):
+        """
+        Unlock: A maze with a treasure in the middle.
+        Upgrade: Increases the gold in treasure chests.
+        """
+        ...
+
+    @property
+    def Debug(self):
+        """Tools to help with debugging programs."""
+        ...
+
+    @property
+    def Debug_2(self):
+        """Functions to temporarily slow down the execution and make the grid smaller."""
+        ...
+
+    @property
+    def Benchmark():
+        """Functions to help measure performance."""
+        ...
+
+    @property
+    def Grass(self):
+        """Increases the yield of grass."""
+        ...
+
+    @property
+    def Multi_Trade(self):
+        """Trade multiple items at once."""
+        ...
+
+    @property
+    def Auto_Unlock(self):
+        """Automatically unlock things."""
+        ...
+
+    @property
+    def Polyculture(self):
+        """Use companion planting to increase the yield."""
+        ...
+
+    @property
+    def Sunflowers(self):
+        """
+        Unlock: Sunflowers and Power.
+        Upgrade: Increases the power gained from sunflowers.
+        """
+        ...
+
+    @property
+    def Leaderboard(self):
+        """Join the leaderboard for the fastest reset time."""
+        ...
+
+    @property
+    def Dictionaries(self):
+        """Get access to dictionaries and sets."""
+        ...
+
+    @property
+    def Utilities(self):
+        """Unlocks the `min()`, `max()` and `abs()` functions."""
+        ...
+
+    @property
+    def Cactus(self):
+        """
+        Unlock: Cactus!
+        Upgrade: Increases the yield of cactus and the cost of cactus seeds."""
+        ...
+
+    @property
+    def Dinosaurs(self):
+        """
+        Unlock: Majestic ancient creatures.
+        Upgrade: Increases the yield of dinosaurs and the cost of eggs.
+        """
+        ...
+
+
+# -------------------------------------------------------------------------------
+class North:
+    """
+    The direction north, i.e. up.
+    """
+
+
+# -------------------------------------------------------------------------------
+class East:
+    """
+    The direction east, i.e. right.
+    """
+
+
+# -------------------------------------------------------------------------------
+class South:
+    """
+    The direction south, i.e. down.
+    """
+
+
+# -------------------------------------------------------------------------------
+class West:
+    """
+    The direction west, i.e. left.
+    """
+
+
+# -------------------------------------------------------------------------------
 def harvest() -> bool:
     """
     Harvests the entity under the drone.
@@ -100,8 +490,7 @@ def swap(direction: North | East | South | West) -> None:
 # -------------------------------------------------------------------------------
 def till() -> None:
     """
-    Till the ground under the drone if it isn't already tilled.
-    Otherwise it turns it back into turf.
+    Tills the ground under the drone into soil. If it's already soil it will change the ground back to turf.
 
     returns `None`
 
@@ -156,7 +545,7 @@ def get_world_size() -> float:
     """
     Get the current size of the farm.
 
-    returns the size of the grid from east to west.
+    returns the side length of the grid in the north to south direction.
 
     takes the time of `1` operation to execute.
 
@@ -583,388 +972,3 @@ def random() -> float:
     ```
     """
     ...
-
-
-# -------------------------------------------------------------------------------
-class Items:
-    @property
-    def Carrot(self):
-        """Obtained by harvesting carrots."""
-        ...
-
-    @property
-    def Carrot_Seed(self):
-        """Used to grow carrots by calling `plant(Entities.Carrots)` on empty soil."""
-        ...
-
-    @property
-    def Empty_Tank(self):
-        """Empty tanks automatically turn into water tanks over time."""
-        ...
-
-    @property
-    def Fertilizer(self):
-        """Call `use_item(Items.Fertilizer)` to instantly grow the plant under the drone by 2s."""
-        ...
-
-    @property
-    def Gold(self):
-        """Found in treasure chests in mazes."""
-        ...
-
-    @property
-    def Hay(self):
-        """Obtained by cutting grass."""
-        ...
-
-    @property
-    def Power(self):
-        """Obtained by harvesting sunflowers. The drone automatically uses this to move twice as fast."""
-        ...
-
-    @property
-    def Pumpkin(self):
-        """Obtained when harvesting pumpkins."""
-        ...
-
-    @property
-    def Pumpkin_Seed(self):
-        """Used to grow pumpkins by calling `plant(Entities.Pumpkin)` on empty soil."""
-        ...
-
-    @property
-    def Sunflower_Seed(self):
-        """Used to grow sunflowers by calling `plant(Entities.Sunflower)` on empty soil."""
-        ...
-
-    @property
-    def Water_Tank(self):
-        """Used to water the ground by calling `use_item(Items.Water_Tank)`."""
-        ...
-
-    @property
-    def Wood(self):
-        """Obtained from bushes and trees."""
-        ...
-
-    @property
-    def Cactus(self):
-        """Obtained when harvesting sorted cacti."""
-        ...
-
-    @property
-    def Cactus_Seed(self):
-        """Used to grow cacti by calling `plant(Entities.Cactus)` on empty soil."""
-        ...
-
-    @property
-    def Egg(self):
-        """Call `use_item(Items.Egg)` to hatch a majestic dinosaur."""
-        ...
-
-    @property
-    def Bones(self):
-        """The bones of an ancient creature."""
-        ...
-
-
-# -------------------------------------------------------------------------------
-class Entities:
-    @property
-    def Grass(self):
-        """
-        Grows automatically. Harvest it to obtain `Items.Hay`.
-
-        Average seconds to grow: 0.5
-        Grows on: turf or soil
-        """
-        ...
-
-    @property
-    def Bush(self):
-        """
-        A small bush that drops `Items.Wood`.
-
-        Average seconds to grow: 4
-        Grows on: turf or soil
-        """
-        ...
-
-    @property
-    def Tree(self):
-        """
-        Trees drop more wood than bushes. They take longer to grow if other trees grow next to them.
-
-        Average seconds to grow: 7
-        Grows on: turf or soil
-        """
-        ...
-
-    @property
-    def Carrots(self):
-        """
-        Carrots!
-
-        Average seconds to grow: 6
-        Grows on: soil
-        """
-        ...
-
-    @property
-    def Pumpkin(self):
-        """
-        Pumpkins grow together when they are next to other fully grown pumpkins. About 1 in 5 pumpkins dies when it grows up.
-         When you harvest a pumpkin you get `Items.Pumpkin` equal to the number of pumpkins in the mega pumpkin cubed.
-
-        Average seconds to grow: 2
-        Grows on: soil
-        """
-        ...
-
-    @property
-    def Sunflower(self):
-        """
-        Sunflowers collect the power from the sun. Harvesting them will give you `Items.Power` equal to the number of sunflowers in the farm.
-         If you harvest a sunflower that doesn't have the maximum number of petals all the sunflowers will die.
-
-        Average seconds to grow: 5
-        Grows on: soil
-        """
-        ...
-
-    @property
-    def Cactus(self):
-        """
-        Cacti come in 10 different sizes. When harvested, all cacti on the field will be harvested. Only those that are in sorted order will drop `Items.Cactus`.
-
-        Average seconds to grow: 1
-        Grows on: soil
-        """
-        ...
-
-    @property
-    def Hedge(self):
-        """Part of the maze. Grow a maze by fertilizing a fully grown bush."""
-        ...
-
-    @property
-    def Treasure(self):
-        """A treasure that contains gold equal to the side length of the maze in which it is hidden. It can be harvested like a plant."""
-        ...
-
-    @property
-    def Dinosaur(self):
-        """
-        A majestic dinosaur. It moves around randomly but won't move for a while after being measured. Harvesting it harvests all adjacent dinosaurs of the same type and makes them drop `Items.Bones`.
-
-        Average seconds to grow: 0.2
-        Grows on: turf or soil
-        """
-        ...
-
-
-# -------------------------------------------------------------------------------
-class Grounds:
-    @property
-    def Turf(self):
-        """The default ground. Grass will automatically grow on it."""
-        ...
-
-    @property
-    def Soil(self):
-        """Calling `till()` turns the ground into this. Calling `till()` again changes it back to turf."""
-        ...
-
-
-# -------------------------------------------------------------------------------
-class Unlocks:
-    @property
-    def Trees(self):
-        """
-        Unlock: Unlocks trees.
-        Upgrade: Increases the yield of bushes and trees.
-        """
-        ...
-
-    @property
-    def Speed(self):
-        """Increases the speed of the drone."""
-        ...
-
-    @property
-    def Plant(self):
-        """Unlocks planting."""
-        ...
-
-    @property
-    def Loops(self):
-        """Unlocks a simple while loop."""
-        ...
-
-    @property
-    def Senses(self):
-        """The drone can see what's under it and where it is."""
-        ...
-
-    @property
-    def Expand(self):
-        """
-        Unlock: Expands the farm land and unlocks movement.
-        Upgrade: Expands the farm. This also clears the farm.
-        """
-        ...
-
-    @property
-    def Operators(self):
-        """Arithmetic, comparison and logic operators."""
-        ...
-
-    @property
-    def Pumpkins(self):
-        """
-        Unlock: Pumpkins!
-        Upgrade: Increases the yield of pumpkins and the cost of pumpkin seeds.
-        """
-        ...
-
-    @property
-    def Variables(self):
-        """Assign values to variables."""
-        ...
-
-    @property
-    def Functions(self):
-        """Define your own functions."""
-        ...
-
-    @property
-    def Watering(self):
-        """Water the plants to make them grow faster."""
-        ...
-
-    @property
-    def Carrots(self):
-        """
-        Unlock: Till the soil and plant carrots.
-        Upgrade: Increases the yield of carrots and the cost of carrot seeds.
-        """
-        ...
-
-    @property
-    def Lists(self):
-        """Use lists to store lots of values."""
-        ...
-
-    @property
-    def Costs(self):
-        """Allows access to the cost of things."""
-        ...
-
-    @property
-    def Fertilizer(self):
-        """Grow plants instantly."""
-        ...
-
-    @property
-    def Mazes(self):
-        """
-        Unlock: A maze with a treasure in the middle.
-        Upgrade: Increases the gold in treasure chests.
-        """
-        ...
-
-    @property
-    def Debug(self):
-        """Tools to help with debugging programs."""
-        ...
-
-    @property
-    def Debug_2(self):
-        """Functions to temporarily slow down the execution and make the grid smaller."""
-        ...
-
-    @property
-    def Grass(self):
-        """Increases the yield of grass."""
-        ...
-
-    @property
-    def Multi_Trade(self):
-        """Trade multiple items at once."""
-        ...
-
-    @property
-    def Auto_Unlock(self):
-        """Automatically unlock things."""
-        ...
-
-    @property
-    def Polyculture(self):
-        """Use companion planting to increase the yield."""
-        ...
-
-    @property
-    def Sunflowers(self):
-        """
-        Unlock: Sunflowers and Power.
-        Upgrade: Increases the power gained from sunflowers.
-        """
-        ...
-
-    @property
-    def Leaderboard(self):
-        """Join the leaderboard for the fastest reset time."""
-        ...
-
-    @property
-    def Dictionaries(self):
-        """Get access to dictionaries and sets."""
-        ...
-
-    @property
-    def Utilities(self):
-        """Unlocks the `min()`, `max()` and `abs()` functions."""
-        ...
-
-    @property
-    def Cactus(self):
-        """
-        Unlock: Cactus!
-        Upgrade: Increases the yield of cactus and the cost of cactus seeds."""
-        ...
-
-    @property
-    def Dinosaurs(self):
-        """
-        Unlock: Majestic ancient creatures.
-        Upgrade: Increases the yield of dinosaurs and the cost of eggs.
-        """
-        ...
-
-
-# -------------------------------------------------------------------------------
-class North:
-    """
-    The direction north, i.e. up.
-    """
-
-
-# -------------------------------------------------------------------------------
-class East:
-    """
-    The direction east, i.e. right.
-    """
-
-
-# -------------------------------------------------------------------------------
-class South:
-    """
-    The direction south, i.e. down.
-    """
-
-
-# -------------------------------------------------------------------------------
-class West:
-    """
-    The direction west, i.e. left.
-    """

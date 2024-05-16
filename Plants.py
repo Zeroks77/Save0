@@ -1,62 +1,59 @@
 def farm_item(i,amount_of_this_item_needed):
 	while num_items(i) < amount_of_this_item_needed:	
-		if i == Items.Hay: 
-			tilled = farm_hay()
-		elif i == Items.Wood:
-			tilled = farm_wood()
-		elif i == Items.Carrot:
-			tilled = farm_carrots()
-		elif i == Items.Pumpkin:
-			tilled = farm_pumpkin()
-		elif i == Items.Gold:
-			tilled = farm_maze()
-		elif i == Items.Cactus:
-			tilled = farm_cati()
-		elif i == Items.Bones: 
-			tilled = farm_dino()
+		if num_items(item_to_trade[i]) != 0 or i == Items.Hay or i == Items.Wood or i == Items.Gold:
+			if i == Items.Hay: 
+				farm_hay()
+			elif i == Items.Wood:
+				farm_wood()
+			elif i == Items.Carrot:
+				farm_carrots()
+			elif i == Items.Pumpkin:
+				farm_pumpkin()
+			elif i == Items.Gold:
+				farm_maze()
+			elif i == Items.Cactus:
+				farm_cati()
+			elif i == Items.Power:
+				farm_sunflower()
+			elif i == Items.Bones: 
+				farm_dino()
+		else:
+			break
 
 def farm_maze():
 	move_to(0,0)
+	harvest()
 	plant(Entities.Bush)
 	minFertilizer = power(get_world_size(), 2) * 3
-	while get_entity_type() == Entities.Bush:
-		trade_item(Items.Fertilizer)
-		if num_items(Items.Fertilizer) > minFertilizer: 
-			use_item(Items.Fertilizer)
-		else:
-			break
-	maze_solve()
+	trade_item(Items.Fertilizer,minFertilizer)
+	while get_entity_type() == Entities.Bush and num_items(Items.Fertilizer) > 0:
+		use_item(Items.Fertilizer)
+	if get_entity_type() == Entities.Hedge:
+		maze_solve()
+	if get_entity_type() == Entities.Treasure:
+		harvest()
 def farm_pumpkin():
-	trade_item(Items.Pumpkin_Seed)
 	initial_plant(Items.Pumpkin)
 	pumpkin_measure()
 
 def farm_sunflower():
-	trade_item(Items.Power)
-	initial_plant(Items.Power)
+	clear_grid()
 	sunflower_measure()
 	
 def farm_carrots():
-	trade_item(Items.Carrot)
 	initial_plant(Items.Carrot)
-	farmgrid(Items.Carrot)
 	
 def farm_wood():
 	initial_plant(Items.Wood)
-	farmgrid(Items.Wood)
 	
 def farm_cati():
-	trade_item(Items.Cactus)
+	clear_grid()
 	initial_plant(Items.Cactus)
 	cactus_measure()
 	
 def farm_dino():
-	trade_item(Items.Egg)
+	clear_grid()
 	initial_plant(Items.Bones)
-	farmgrid(Items.Bones)
 	
 def farm_hay():
-	if get_world_size() == 1: 
-		harvest_item(Items.Hay)
-	else:
-		farmgrid(Items.Hay)
+	harvest_item(Items.Hay)

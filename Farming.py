@@ -1,10 +1,3 @@
-def farm():
-	try_unlock() 
-	return 
-
-	
-
-	
-	
+farm_cati()
 	
 				

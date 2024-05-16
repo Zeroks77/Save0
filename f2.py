@@ -1,2 +1,2 @@
-for unlock in Unlocks:
-	quick_print(unlock)
+
+quick_print(calc_all_cost(Unlocks.Speed))

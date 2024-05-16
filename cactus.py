@@ -2,8 +2,9 @@ def cactus_measure():
 	grid = grid_dimentional()
 	for i in range(len(grid)):
 		for j in range(len(grid)):
-			move_to(i,j)
+			move_to(i,j) 
 			grid[i][j] = measure()
+			if grid[i][j] == None:				return
 	a = 0
 	while not grid_sorted(grid):
 		for i in range(len(grid)):
