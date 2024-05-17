@@ -7,7 +7,7 @@ def create_list(n):
 	
 def sunflower_measure():
 	world_size = get_world_size()
-	seeds = num_items(Items.Sunflower_Seed)
+	seeds = power(world_size,2)
 	grid = create_list(power(world_size,2))
 	move_to(0,0)
 	for i in range(len(grid)):
@@ -15,9 +15,7 @@ def sunflower_measure():
 		grid[i]= [measure(),(get_pos_x(),get_pos_y())]
 		move_()
 	sort_list_index(grid,0)
-	
-	a = world_size // 1.2
-	while grid[len(grid)-1][0] > a  and seeds > world_size * 2: 
+	while grid[len(grid)-1][0] > 11 and num_items(Items.Sunflower_Seed) > seeds: 
 		pos = grid[len(grid)-1][1]
 		move_to(pos[0], pos[1])
 		while not can_harvest():
@@ -29,6 +27,7 @@ def sunflower_measure():
 			find_same_pedals(grid)
 			
 def clear_grid():
+	move_to(0,0)
 	while not on_board_end():
 		harvest()
 		move_()

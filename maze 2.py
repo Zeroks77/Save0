@@ -11,8 +11,8 @@ def map_maze():
 			treasure = (x_,y_)
 		if grid[x_][y_] == None:
 			grid[x_][y_] =  direction_check()
-		dir = (dir + dir_change[move(dirs[dir])]) % 4
-	for x in range(10):		quick_print(grid[x])#solve_maze(grid, treasure)
+		dir = (dir + dir_change[move(dirs[dir])]) % 4	for i in range(len(grid)):
+		quick_print(grid[i])	#solve_maze(grid, treasure)
 	
 def solve_maze(grid, treasure):
 	x_, y_ = get_pos_x(), get_pos_y()
@@ -32,8 +32,7 @@ def solve_maze(grid, treasure):
 			break
 		if len(dirs) == 1:
 			x,y = path[0][0][0] + x_dir[dirs[0]], path[0][0][1] + y_dir[dirs[0]] 
-			if not in_list(path, [(x,y),dir_ops[dirs[0]]]):
-				path.insert(0,[(x,y), dirs[0]])
+			path.insert(0,[(x,y), dirs[0]])
 			dirs = grid[x][y]
 		else:
 			next_step = [100,(treasure[0],treasure[1]), None]
@@ -49,11 +48,12 @@ def solve_maze(grid, treasure):
 				t= path.pop(0)
 				d = t[1]
 				x,y = t[0][0] + x_dir[d]* -1, t[0][1] + y_dir[d] * -1
-				dirs = grid[x][y]
+				dirs = grid[x][y] 
 				dirs.remove(d)
 				continue
 			if not in_list(path, [(next_step[1][0],next_step[1][1]),next_step[2]]):
 				path.insert(0,[next_step[1], next_step[2]])
+				d = path[0][1]
 				dirs = grid[next_step[1][0]][next_step[1][1]] 
 			
 		

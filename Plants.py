@@ -32,28 +32,26 @@ def farm_maze():
 		maze_solve()
 	if get_entity_type() == Entities.Treasure:
 		harvest()
+	till_field()
 def farm_pumpkin():
-	initial_plant(Items.Pumpkin)
+	clear_row(2) 
+	plant_field(Items.Pumpkin)
 	pumpkin_measure()
 
 def farm_sunflower():
 	clear_grid()
 	sunflower_measure()
-	
 def farm_carrots():
-	initial_plant(Items.Carrot)
+	plant_row(Items.Carrot,2)
 	
 def farm_wood():
-	initial_plant(Items.Wood)
-	
+	plant_row(Items.Wood,2)
 def farm_cati():
 	clear_grid()
-	initial_plant(Items.Cactus)
+	plant_field(Items.Cactus)
 	cactus_measure()
-	
 def farm_dino():
 	clear_grid()
-	initial_plant(Items.Bones)
-	
+	plant_field(Items.Bones)
 def farm_hay():
 	harvest_item(Items.Hay)

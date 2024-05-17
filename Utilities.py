@@ -7,12 +7,19 @@ def water():
 			return
 		trade(Items.Empty_Tank, world_size - 1)
 		
+def clear_row(rows): 
+	move_to(0,0)
+	world = get_world_size() * rows
+	for i in range(world): 
+		harvest()
+		move_()
+		
 def fertilize():
 	world_size = get_world_size()
 	if can_harvest() == False  and num_items(Items.Fertilizer) > power(get_world_size(),3):
 		use_item(Items.Fertilizer)
 	elif num_unlocked(Unlocks.Fertilizer) > 0 and num_items(Items.Pumpkin) > get_cost(Items.Fertilizer)[Items.Pumpkin]	* world_size:
-		trade(Items.Fertilizer, world_size - 1)
+		trade(Items.Fertilizer, world_size -1)
 
 def harvest_item(Item):
 	if can_harvest():
@@ -23,15 +30,23 @@ def harvest_item(Item):
 	else: 
 		water()
 		
-def initial_plant(Item):
+def plant_row(Item,rows):
+	move_to(0,0)
+	world = get_world_size() * rows
+	for i in range(world):
+		if can_harvest():
+			harvest() 
+		plant_item(Item)
+		move_()		
+		
+def plant_field(Item):
 	if Item == Items.Hay:
 		return 	
 	move_to(0,0)
 	while not on_board_end():
 		if can_harvest():
 			harvest() 
-		plant_item(Item)
-		water()		move_()
+		plant_item(Item)		move_()
 	if can_harvest():
 		harvest() 
 	plant_item(Item)

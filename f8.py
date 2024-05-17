@@ -1,4 +1,3 @@
-timed_reset()
 unlocks = [
 	Unlocks.Grass,
 	Unlocks.Speed,
@@ -42,34 +41,26 @@ item_to_entity = {
 	Items.Cactus:Entities.Cactus
 }
 yield = {
-	Items.Cactus : 8, 
+	Items.Cactus : 35, 
 	Items.Carrot : 3, 
-	Items.Pumpkin: 8, 
-	Items.Bones: 1, 
-	Items.Power: 4,
-	Items.Gold : 82
+	Items.Pumpkin: 50, 
+	Items.Bones: 6, 
+	Items.Power: 12,
+	Items.Gold : 45
 }
 cost_scale = {
-	Items.Wood : 1,
-	Items.Hay : 1,
-	Items.Carrot : 1.5, 
-	Items.Pumpkin: 0.3, 
-	Items.Gold : 0.75,
-	Items.Cactus : 2, 
-	Items.Bones: 3, 
-	Items.Power: 2
+	Items.Wood : 0.5,
+	Items.Hay : 0.5,
+	Items.Carrot : 1, 
+	Items.Pumpkin: 1.5, 
+	Items.Gold : 2,
+	Items.Cactus : 2.5, 
+	Items.Bones: 3.5, 
+	Items.Power: 1.5
 }
-till_ = {
-	Items.Hay : False,
-	Items.Carrot: True,
-	Items.Pumpkin: True,
-	Items.Power : True,
-	Items.Cactus : True,
-	Items.Gold : False,
-	Items.Bones : True
-}
+timed_reset()
 for i in unlocks: 
-	upgraded_list.append([i,calc_all_cost(i)])
-while not unlock(Unlocks.Leaderboard):
+	upgraded_list.append([i,calc_all_cost(i), get_cost(i)])
+while num_unlocked(Unlocks.Leaderboard) == 0:
 	try_unlock()  
 timed_reset()
