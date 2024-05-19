@@ -10,6 +10,7 @@ def pumpkin_measure():
 			if get_entity_type() == None:
 				check_positions.insert(0,pos)
 				plant(Entities.Pumpkin)
+				water()
 			if not can_harvest():
 				check_positions.insert(0,pos)
-	harvest_item(Items.Pumpkin)
+	harvest()

@@ -1,11 +1,17 @@
 def try_unlock():
 	sort_list_index(upgraded_list,1)
 	for u in upgraded_list:
-		if u[1] == 0:
+		if u[1] == 0 or num_unlocked(u[0]) > 5 and u[0] != Unlocks.Expand:
+			upgraded_list.remove(u)
 			continue 
 		costs = u[2]
+		if num_unlocked(item_to_unlock[Items.Power]) > 2 and num_items(Items.Power) < get_world_size() ** 4:
+			item = Items.Power
+			trade_item(item,get_world_size() **3)
+			prep(item)
+			farm_item(item, get_world_size() ** 3)
 		for item in costs:
-			if item == Items.Power and num_unlocked(Unlocks.Sunflowers) < 4:
+			if num_unlocked(item_to_unlock[item]) < 3 and (item != Items.Wood and item != Items.Pumpkin and item != Items.Hay and item != Items.Carrot):
 				break
 			if not can_unlock(item) or num_unlocked(item) == 0:
 				break

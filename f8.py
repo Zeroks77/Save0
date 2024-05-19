@@ -15,6 +15,8 @@ unlocks = [
 ]
 upgraded_list = []
 item_to_unlock = {
+	Items.Hay : Unlocks.Grass,
+	Items.Wood : Unlocks.Trees,
 	Items.Carrot: Unlocks.Carrots,
 	Items.Pumpkin: Unlocks.Pumpkins,
 	Items.Power : Unlocks.Sunflowers,
@@ -41,22 +43,22 @@ item_to_entity = {
 	Items.Cactus:Entities.Cactus
 }
 yield = {
-	Items.Cactus : 35, 
+	Items.Cactus : get_world_size() **3, 
 	Items.Carrot : 3, 
-	Items.Pumpkin: 50, 
-	Items.Bones: 6, 
-	Items.Power: 12,
-	Items.Gold : 45
+	Items.Pumpkin: get_world_size() **3, 
+	Items.Bones: get_world_size()**2 * 4, 
+	Items.Power: 14,
+	Items.Gold : 350
 }
 cost_scale = {
 	Items.Wood : 0.5,
 	Items.Hay : 0.5,
 	Items.Carrot : 1, 
-	Items.Pumpkin: 1.5, 
-	Items.Gold : 2,
-	Items.Cactus : 2.5, 
-	Items.Bones: 3.5, 
-	Items.Power: 1.5
+	Items.Pumpkin: 0.7, 
+	Items.Gold : 1,
+	Items.Cactus : 1, 
+	Items.Bones: 0.7, 
+	Items.Power: 3
 }
 timed_reset()
 for i in unlocks: 

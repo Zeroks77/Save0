@@ -2,7 +2,6 @@ def create_list(n):
 	grid = []
 	for i in range(0,n,+1):
 		grid.append(None)
-	quick_print(i)
 	return grid
 	
 def sunflower_measure():
@@ -16,16 +15,23 @@ def sunflower_measure():
 		move_()
 	sort_list_index(grid,0)
 	while grid[len(grid)-1][0] > 11 and num_items(Items.Sunflower_Seed) > seeds: 
-		pos = grid[len(grid)-1][1]
+		data = grid[len(grid)-1]
+		pos = data[1]
 		move_to(pos[0], pos[1])
 		while not can_harvest():
-			water()
+			fertilize()
 		harvest()
 		plant(Entities.Sunflower)
 		grid[len(grid)-1][0] = measure()
 		if grid[len(grid)-1][0] < grid[len(grid)-2][0]:
 			find_same_pedals(grid)
-			
+	while len(grid) > 0:
+		pos = grid.pop(len(grid)-1)[1]
+		move_to(pos[0],pos[1])
+		harvest()
+		
+	
+		
 def clear_grid():
 	move_to(0,0)
 	while not on_board_end():
@@ -34,12 +40,14 @@ def clear_grid():
 	harvest()
 	move_()
 	def find_same_pedals(grid):
-	new_pedal =  grid[len(grid)-1] 
+	new_pedal =  grid[len(grid)-1]
 	for i in range(len(grid)-2,-1,-1):
 		pedal = grid[i][0]
-		if  pedal < new_pedal[0]: 
-			grid.insert(i,new_pedal)
+		if  pedal <= new_pedal[0]: 
+			grid.insert(i+1,new_pedal)
 			grid.pop(len(grid)-1)
 			break
+
+	
 		
 		
