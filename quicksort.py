@@ -63,3 +63,12 @@ def partition(list, left, right,index):
 
 def element_swap(list, i, j):
 	(list[i], list[j]) = (list[j], list[i])
+	
+
+def buble_sort_list(list, index):
+	l = len(list)-1
+	for i in range(l,-1,-1):
+		if i+1 <= l:
+			if list[i][index] < list[i-1][index]:
+				list[i],list[i+1] = list[i+1],list[i]
+	return

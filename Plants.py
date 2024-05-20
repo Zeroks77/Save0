@@ -21,40 +21,44 @@ def farm_item(i,amount_of_this_item_needed):
 			break
 
 def farm_maze():
+	minFertilizer = power(get_world_size(), 4)
+	trade_item(Items.Fertilizer,minFertilizer)
 	move_to(0,0)
 	harvest()
-	plant(Entities.Bush)
-	minFertilizer = power(get_world_size(), 4) * 3
-	trade_item(Items.Fertilizer,minFertilizer)
 	navigate_maze(500)
-	harvest()
 	till_field()
 def farm_pumpkin():
 	move_to(0,0)
-	if get_entity_type() != None:
-		clear_row(2) 
-	pumpkin_measure()
+	min_fet = get_world_size()**2 *2
+	clear_row(1) 
+	if num_unlocked(Items.Fertilizer) == 1:
+		if not fertilized_pumpkin_measure():
+			pumpkin_measure()
+	else: 		pumpkin_measure()
+	
 
 def farm_sunflower():
 	clear_grid()
 	sunflower_measure()
+
 def farm_carrots():
-	if num_unlocked(Unlocks.Trees):
-		plant_row(Items.Carrot,1)
+	if num_unlocked(Unlocks.Expand) > 5:
+		plant_row(Items.Carrot,1, True)
 	else: 
-		plant_row(Items.Carrot,2)
+		plant_row(Items.Carrot,1)
 	
 def farm_wood():
-	if num_unlocked(Unlocks.Trees):
-		plant_row(Items.Wood,1)
-	else: 
-		plant_row(Items.Wood,2)
+	harvest(Items.Wood)
+	
+	
+	if num_unlocked(Unlocks.Expand) > 5:
+		plant_row(Items.Wood,1, True)
+	else:		plant_row(Items.Wood,1)
+	
 def farm_cati():
-	clear_grid()
 	plant_field(Items.Cactus)
 	cactus_measure()
 def farm_dino():
-	clear_grid()
 	dino()
 def farm_hay():
 	harvest_item(Items.Hay)

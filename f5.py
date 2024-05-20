@@ -1,20 +1,18 @@
 def try_unlock():
-	sort_list_index(upgraded_list,1)
 	for u in upgraded_list:
-		if u[1] == 0 or num_unlocked(u[0]) > 5 and u[0] != Unlocks.Expand:
+		if u[0] == Unlocks.Fertilizer and num_unlocked(u[0]) > 0 or  u[0] == Unlocks.Plant and num_unlocked(u[0]) > 0 :
+			upgraded_list.remove(u)
+			continue
+		if u[1] == 0 or num_unlocked(u[0]) > 4 and u[0] != Unlocks.Expand:
 			upgraded_list.remove(u)
 			continue 
 		costs = u[2]
-		if num_unlocked(item_to_unlock[Items.Power]) > 2 and num_items(Items.Power) < get_world_size() ** 4:
-			item = Items.Power
-			trade_item(item,get_world_size() **3)
-			prep(item)
-			farm_item(item, get_world_size() ** 3)
 		for item in costs:
-			if num_unlocked(item_to_unlock[item]) < 3 and (item != Items.Wood and item != Items.Pumpkin and item != Items.Hay and item != Items.Carrot):
-				break
 			if not can_unlock(item) or num_unlocked(item) == 0:
 				break
+			if num_unlocked(item_to_unlock[item]) < 2 and (item != Items.Wood and item != Items.Pumpkin and item != Items.Hay and item != Items.Carrot):
+				break
+			farm_power_check()
 			amount_of_this_item_needed = costs[item] 
 			seeds_needed = ((amount_of_this_item_needed - num_items(item)) // return_current_yield_per_tile(item)) +1
 			trade_item(item,seeds_needed)
@@ -23,10 +21,15 @@ def try_unlock():
 			if unlock(u[0]):
 				if u[0] == Unlocks.Expand:					till_field() 
 				upgraded_list.remove(u)
-				upgraded_list.append([u[0],calc_all_cost(u[0]),get_cost(u[0])])
+				upgraded_list.append([u[0],calc_all_cost(u[0]),get_cost(u[0])])	
+				sort_list_index(upgraded_list,1)
 				return
 
-				
+def farm_power_check():	if num_unlocked(item_to_unlock[Items.Power]) > 2 and num_items(Items.Power) < get_world_size() ** 3:
+		item = Items.Power
+		trade_item(item, (get_world_size() ** 3) )
+		prep(item)
+		farm_item(item, get_world_size() ** 4)			
 def return_current_yield_per_tile(item):
 	if item == Items.Hay or item == Items.Wood :
 		return 1

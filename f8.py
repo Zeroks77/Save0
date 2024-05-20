@@ -1,19 +1,19 @@
 unlocks = [
-	Unlocks.Grass,
-	Unlocks.Speed,
-	Unlocks.Expand,
-	Unlocks.Plant, 
-	Unlocks.Carrots,
-	Unlocks.Trees,
-	Unlocks.Pumpkins,
-	Unlocks.Sunflowers,
-	Unlocks.Fertilizer,
-	Unlocks.Mazes,
-	Unlocks.Cactus,
+	Unlocks.Leaderboard,
 	Unlocks.Dinosaurs,
-	Unlocks.Leaderboard
+	Unlocks.Cactus,
+	Unlocks.Sunflowers,
+	Unlocks.Mazes,
+	Unlocks.Fertilizer,
+	Unlocks.Pumpkins,
+	Unlocks.Trees,
+	Unlocks.Carrots,
+	Unlocks.Plant, 
+	Unlocks.Expand,
+	Unlocks.Speed,
+	Unlocks.Grass
 ]
-upgraded_list = []
+
 item_to_unlock = {
 	Items.Hay : Unlocks.Grass,
 	Items.Wood : Unlocks.Trees,
@@ -48,7 +48,7 @@ yield = {
 	Items.Pumpkin: get_world_size() **3, 
 	Items.Bones: get_world_size()**2 * 4, 
 	Items.Power: 14,
-	Items.Gold : 350
+	Items.Gold : 500
 }
 cost_scale = {
 	Items.Wood : 0.5,
@@ -60,7 +60,9 @@ cost_scale = {
 	Items.Bones: 0.7, 
 	Items.Power: 3
 }
+upgraded_list = []
 timed_reset()
+op = get_op_count()
 for i in unlocks: 
 	upgraded_list.append([i,calc_all_cost(i), get_cost(i)])
 while num_unlocked(Unlocks.Leaderboard) == 0:

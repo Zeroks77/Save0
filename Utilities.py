@@ -3,23 +3,27 @@ def water():
 	if get_water() < 0.8 and num_items(Items.Water_Tank) > 0 :
 		use_item(Items.Water_Tank)
 	elif num_items(Items.Wood) > get_cost(Items.Empty_Tank)[Items.Wood] * world_size:
-		if num_items(Items.Water_Tank) + num_items(Items.Empty_Tank) > power(world_size,3) or num_unlocked(Unlocks.Trees) < 3:
+		if num_items(Items.Water_Tank) + num_items(Items.Empty_Tank) > world_size**3:
 			return
-		trade(Items.Empty_Tank, world_size - 1)
+		trade(Items.Empty_Tank,1)
+		use_item(Items.Water_Tank)
 		
-def clear_row(rows): 
+def clear_row(rows, half = False):
 	move_to(0,0)
-	world = get_world_size() * rows
+	world = get_world_size() * rows 
+	if half:
+		world = world // 2
 	for i in range(world): 
 		harvest()
 		move_()
 		
 def fertilize():
 	world_size = get_world_size()
-	if can_harvest() == False  and num_items(Items.Fertilizer) > power(get_world_size(),2):
+	if can_harvest() == False  and num_items(Items.Fertilizer) > 0:
 		use_item(Items.Fertilizer)
 	elif num_unlocked(Unlocks.Fertilizer) > 0 and num_items(Items.Pumpkin) > get_cost(Items.Fertilizer)[Items.Pumpkin]	* world_size:
 		trade(Items.Fertilizer, world_size -1)
+		use_item(Items.Fertilizer)
 
 def harvest_item(Item):
 	if can_harvest():
@@ -30,24 +34,28 @@ def harvest_item(Item):
 	else: 
 		water()
 		
-def plant_row(Item,rows):
+def plant_row(Item,rows, half = False):
 	move_to(0,0)
-	world = get_world_size() * rows
+	world = get_world_size() * rows -1
+	if half:
+		world = world // 2
 	for i in range(world):
 		if can_harvest():
 			harvest() 
 		plant_item(Item)
-		move_()		
+		move_()
+	if can_harvest():
+		harvest() 	plant_item(Item)		
 		
 def plant_field(Item):
 	if Item == Items.Hay:
 		return 	
 	move_to(0,0)
 	while not on_board_end():
-		if can_harvest():
+		if  get_entity_type() != item_to_entity[Item]:
 			harvest() 
 		plant_item(Item)		move_()
-	if can_harvest():
+	if get_entity_type() != item_to_entity[Item]:
 		harvest() 
 	plant_item(Item)
 	
@@ -69,11 +77,11 @@ def plant_item(Item):
 		plant(item_to_entity[Item]) 	
 	water()
 		
-def farmgrid(item) : 	for i in range(get_world_size()):
-		for j in range(get_world_size()):
-			harvest_item(item)
-			move(North)
-		move(East)
+def farmgrid(item) : 	while not on_board_end():
+		harvest_item(item)
+		move_()
+	harvest_item(item)
+	move_()
 				
 def till_field(): 	move_to(0,0)
 	while not on_board_end():
@@ -109,10 +117,10 @@ def on_board_end():
 
 	
 def fill_with_board():
-	world_size = get_world_size()
+	world_size = range(get_world_size())
 	position_list = []
-	for i in range(world_size):
-		for j in range(world_size):
+	for i in world_size:
+		for j in world_size:
 			position_list.append([i,j])	return position_list
 	
 
@@ -121,8 +129,8 @@ def trade_item(item, count):
 		return
 	needed_item = item_to_trade[item]
 	cost_ = get_cost(needed_item) 
-	if item == Items.Power or item ==Items.Cactus or item ==Items.Pumpkin:
-		count = power(get_world_size(),2) * 2
+	if item ==Items.Cactus or item ==Items.Pumpkin:
+		count = power(get_world_size(),2) * 3
 	if item == Items.Bones:
 		count = power(get_world_size(),2) * 3
 	current_seeds = num_items(needed_item) 
