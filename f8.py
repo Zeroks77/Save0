@@ -40,14 +40,15 @@ item_to_entity = {
 	Items.Carrot:Entities.Carrots,
 	Items.Pumpkin:Entities.Pumpkin,
 	Items.Power:Entities.Sunflower,
-	Items.Cactus:Entities.Cactus
+	Items.Cactus:Entities.Cactus,
+	Items.Hay : Entities.Grass
 }
 yield = {
 	Items.Cactus : get_world_size() **3, 
-	Items.Carrot : 3, 
+	Items.Carrot : 4, 
 	Items.Pumpkin: get_world_size() **3, 
 	Items.Bones: get_world_size()**2 * 4, 
-	Items.Power: 14,
+	Items.Power: 10,
 	Items.Gold : 500
 }
 cost_scale = {
@@ -57,14 +58,63 @@ cost_scale = {
 	Items.Pumpkin: 0.7, 
 	Items.Gold : 1,
 	Items.Cactus : 1, 
-	Items.Bones: 0.7, 
-	Items.Power: 3
+	Items.Bones: 0.5, 
+	Items.Power: 1
 }
-upgraded_list = []
+upgraded_list = [
+Unlocks.Grass,
+Unlocks.Grass,
+Unlocks.Grass,
+Unlocks.Grass,
+Unlocks.Speed,
+Unlocks.Plant,
+Unlocks.Expand,
+Unlocks.Grass,
+Unlocks.Speed,
+Unlocks.Expand,
+Unlocks.Carrots,
+Unlocks.Speed,
+Unlocks.Trees,
+Unlocks.Trees,
+Unlocks.Expand,
+Unlocks.Carrots,
+Unlocks.Carrots,
+Unlocks.Pumpkins,
+Unlocks.Expand,
+Unlocks.Polyculture,
+Unlocks.Speed,
+Unlocks.Grass,
+Unlocks.Carrots,
+Unlocks.Carrots,
+Unlocks.Carrots,
+Unlocks.Expand,
+Unlocks.Speed,
+Unlocks.Pumpkins,
+Unlocks.Pumpkins,
+Unlocks.Fertilizer,
+Unlocks.Expand,
+Unlocks.Expand,
+Unlocks.Speed,
+Unlocks.Speed,
+Unlocks.Speed,
+Unlocks.Mazes,
+Unlocks.Mazes,
+Unlocks.Mazes,
+Unlocks.Sunflowers,
+Unlocks.Cactus,
+Unlocks.Cactus,
+Unlocks.Cactus,
+Unlocks.Speed,
+Unlocks.Speed,
+Unlocks.Speed,
+Unlocks.Dinosaurs,
+Unlocks.Dinosaurs,
+Unlocks.Leaderboard
+]
 timed_reset()
 op = get_op_count()
-for i in unlocks: 
-	upgraded_list.append([i,calc_all_cost(i), get_cost(i)])
+#for i in unlocks: 
+	#upgraded_list.append([i,calc_all_cost(i), get_cost(i)])
 while num_unlocked(Unlocks.Leaderboard) == 0:
 	try_unlock()  
 timed_reset()

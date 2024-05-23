@@ -9,6 +9,8 @@ def sunflower_measure():
 	seeds = power(world_size,2)
 	grid = create_list(15)
 	move_to(0,0)
+	if num_items(Items.Sunflower_Seed) < seeds :
+		trade_item(Items.Power,seeds)
 	while not on_board_end():
 		plant(Entities.Sunflower)
 		mes = measure()
@@ -20,18 +22,22 @@ def sunflower_measure():
 	move_()
 	i = find_index(grid)
 	#while len(grid) >
-	while i > 11 and num_items(Items.Sunflower_Seed) > seeds: 
+	while i > 11 and num_items(Items.Sunflower_Seed) > 0: 
 		data = grid[i]
 		while len(grid[i]) > 0:
 			pos = grid[i][0]
 			move_to(pos[0], pos[1])
 			grid[i].remove(pos)
 			while not can_harvest():
-				fertilize()
-			quick_print("measure should:", i, "measure is:", measure(), "measuer 15 row", grid[15])
+				if num_items(Items.Fertilizer) > 0:
+					fertilize()
+				else:
+					water()
 			harvest()
 			plant(Entities.Sunflower)
 			index = measure()
+			if index == None:
+				break
 			if index > i:
 				i = index
 			grid[index].append((get_pos_x(),get_pos_y()))	
@@ -41,10 +47,7 @@ def sunflower_measure():
 			pos = i[0]
 			move_to(pos[0],pos[1])
 			harvest()
-	#while len(grid) > 0:
-		#pos = grid.pop(len(grid)-1)[1]
-		#move_to(pos[0],pos[1])
-		#arvest()
+			
 def find_index(grid):
 	for i in range(15,0,-1):
 		row = grid[i]

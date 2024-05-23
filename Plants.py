@@ -21,44 +21,42 @@ def farm_item(i,amount_of_this_item_needed):
 			break
 
 def farm_maze():
-	minFertilizer = power(get_world_size(), 4)
+	minFertilizer = power(get_world_size(), 3)
 	trade_item(Items.Fertilizer,minFertilizer)
 	move_to(0,0)
 	harvest()
-	navigate_maze(500)
+	navigate_maze(50)
 	till_field()
-def farm_pumpkin():
-	move_to(0,0)
-	min_fet = get_world_size()**2 *2
-	clear_row(1) 
-	if num_unlocked(Items.Fertilizer) == 1:
-		if not fertilized_pumpkin_measure():
-			pumpkin_measure()
-	else: 		pumpkin_measure()
+def farm_pumpkin():	pumpkin_measure()
 	
-
 def farm_sunflower():
 	clear_grid()
 	sunflower_measure()
 
 def farm_carrots():
-	if num_unlocked(Unlocks.Expand) > 5:
-		plant_row(Items.Carrot,1, True)
-	else: 
-		plant_row(Items.Carrot,1)
+	if num_unlocked(Unlocks.Polyculture) == 1:
+		polyculture(Entities.Carrots)
+	else:
+		plant_row(Items.Carrot)
 	
 def farm_wood():
-	harvest(Items.Wood)
-	
-	
-	if num_unlocked(Unlocks.Expand) > 5:
-		plant_row(Items.Wood,1, True)
-	else:		plant_row(Items.Wood,1)
+	harvest()
+	if num_unlocked(Unlocks.Polyculture) == 1:
+		polyculture(Entities.Tree)
+	else:
+		plant_row(Items.Wood)
 	
 def farm_cati():
 	plant_field(Items.Cactus)
 	cactus_measure()
+	
 def farm_dino():
 	dino()
 def farm_hay():
-	harvest_item(Items.Hay)
+	if num_unlocked(Unlocks.Polyculture) == 1:
+		polyculture(Entities.Grass)
+	else:
+		if num_unlocked(Unlocks.Plant) == 0:
+			harvest_item(Items.Hay)
+		else:
+			plant_row(Items.Hay)

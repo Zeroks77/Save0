@@ -2,10 +2,10 @@ def water():
 	world_size = get_world_size()
 	if get_water() < 0.8 and num_items(Items.Water_Tank) > 0 :
 		use_item(Items.Water_Tank)
-	elif num_items(Items.Wood) > get_cost(Items.Empty_Tank)[Items.Wood] * world_size:
+	elif num_items(Items.Wood) > get_cost(Items.Empty_Tank)[Items.Wood] * world_size**2:
 		if num_items(Items.Water_Tank) + num_items(Items.Empty_Tank) > world_size**3:
 			return
-		trade(Items.Empty_Tank,1)
+		trade(Items.Empty_Tank,world_size)
 		use_item(Items.Water_Tank)
 		
 def clear_row(rows, half = False):
@@ -34,9 +34,9 @@ def harvest_item(Item):
 	else: 
 		water()
 		
-def plant_row(Item,rows, half = False):
+def plant_row(Item,rows = get_world_size(), half = False):
 	move_to(0,0)
-	world = get_world_size() * rows -1
+	world = get_world_size() * rows
 	if half:
 		world = world // 2
 	for i in range(world):
@@ -48,8 +48,6 @@ def plant_row(Item,rows, half = False):
 		harvest() 	plant_item(Item)		
 		
 def plant_field(Item):
-	if Item == Items.Hay:
-		return 	
 	move_to(0,0)
 	while not on_board_end():
 		if  get_entity_type() != item_to_entity[Item]:
@@ -63,8 +61,6 @@ def power(num, exp ):
 	return num ** exp	
 	
 def plant_item(Item):
-	if Item == Items.Hay:
-		return
 	if Item == Items.Bones:
 		use_item(Items.Egg)
 		return
@@ -129,10 +125,10 @@ def trade_item(item, count):
 		return
 	needed_item = item_to_trade[item]
 	cost_ = get_cost(needed_item) 
-	if item ==Items.Cactus or item ==Items.Pumpkin:
-		count = power(get_world_size(),2) * 3
+	if item ==Items.Cactus or item ==Items.Pumpkin or item == Items.Power:
+		count = power(get_world_size(),2) *2 
 	if item == Items.Bones:
-		count = power(get_world_size(),2) * 3
+		count = get_world_size()**2 * 4
 	current_seeds = num_items(needed_item) 
 	if current_seeds > 0:
 		count -= current_seeds
@@ -146,7 +142,6 @@ def trade_item(item, count):
 			continue
 		seeds_needed = ((amount_of_this_item_needed - num_items(item_)) // return_current_yield_per_tile(item_)) + 1 + get_world_size()
 		trade_item(item_,amount_of_this_item_needed)
-		prep(item_)
 		farm_item(item_ , amount_of_this_item_needed + current_num )
 	trade(needed_item ,count)
 
