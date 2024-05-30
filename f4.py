@@ -1,7 +1,6 @@
 def polyculture(Entity):
 	grid = {}
 	move_to(0,0)
-	till()
 	def get_Entity(x,y):
 		if (x,y) in grid:
 			return grid[(x,y)]
@@ -17,7 +16,10 @@ def polyculture(Entity):
 		while not can_harvest() and get_entity_type() != None:
 			water()
 		harvest()
+		till_()
+		e = get_Entity(x,y)
 		plant(get_Entity(x,y))
+		water()
 		com = get_companion()
 		if com == None:
 			return		else: 
@@ -29,6 +31,5 @@ def polyculture(Entity):
 	while not on_board_end():
 		tile_()
 		move_()
-	clear_grid()
 				
 	
