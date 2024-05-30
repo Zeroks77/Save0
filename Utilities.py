@@ -2,7 +2,7 @@ def water():
 	world_size = get_world_size()
 	if get_water() < 0.8 and num_items(Items.Water_Tank) > 0 :
 		use_item(Items.Water_Tank)
-	elif num_items(Items.Wood) > get_cost(Items.Empty_Tank)[Items.Wood] * world_size**2:
+	elif num_items(Items.Wood) > get_cost(Items.Empty_Tank)[Items.Wood] * world_size:
 		if num_items(Items.Water_Tank) + num_items(Items.Empty_Tank) > world_size**3:
 			return
 		trade(Items.Empty_Tank,world_size)
@@ -42,6 +42,7 @@ def plant_row(Item,rows = get_world_size(), half = False):
 	for i in range(world):
 		if can_harvest():
 			harvest() 
+		till_()
 		plant_item(Item)
 		move_()
 	if can_harvest():
@@ -54,7 +55,7 @@ def plant_field(Item):
 			harvest() 
 		plant_item(Item)		move_()
 	if get_entity_type() != item_to_entity[Item]:
-		harvest() 
+		harvest()
 	plant_item(Item)
 	
 def power(num, exp ): 
@@ -70,6 +71,7 @@ def plant_item(Item):
 		else:
 			woodgrid()
 	if get_entity_type() == None:
+		till_()
 		plant(item_to_entity[Item]) 	
 	water()
 		
@@ -90,7 +92,9 @@ def till_field(): 	move_to(0,0)
 			if get_entity_type() != None:
 				harvest()
 			till()
-
+def till_():
+	if get_ground_type() == Grounds.Turf:
+		till()
 def untill_field():	
 	move_to(0,0)
 	while not on_board_end():
@@ -140,8 +144,11 @@ def trade_item(item, count):
 		amount_of_this_item_needed = (cost_[item_ ] * count) - current_num 
 		if amount_of_this_item_needed <= 0 :
 			continue
-		seeds_needed = ((amount_of_this_item_needed - num_items(item_)) // return_current_yield_per_tile(item_)) + 1 + get_world_size()
-		trade_item(item_,amount_of_this_item_needed)
+		seeds_needed = 0
+		if item_ == Items.Carrot:
+			yield = (3 * (num_unlocked(Unlocks.Carrots) -1))
+			seeds_needed = ((amount_of_this_item_needed - num_items(item)) // yield) +1
+		trade_item(item_,seeds_needed)
 		farm_item(item_ , amount_of_this_item_needed + current_num )
 	trade(needed_item ,count)
 

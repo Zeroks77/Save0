@@ -12,11 +12,13 @@ def sunflower_measure():
 	if num_items(Items.Sunflower_Seed) < seeds :
 		trade_item(Items.Power,seeds)
 	while not on_board_end():
+		till_()
 		plant(Entities.Sunflower)
 		mes = measure()
 		if mes != None:
 			grid[mes].append((get_pos_x(),get_pos_y()))
 		move_()
+	till_()
 	plant(Entities.Sunflower)
 	grid[measure()].append((get_pos_x(),get_pos_y()))
 	move_()

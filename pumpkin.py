@@ -10,10 +10,12 @@ def pumpkin_measure():
 			if e != Entities.Pumpkin:
 				harvest()
 				check_positions.insert(0,pos)
+				till_()
 				plant(Entities.Pumpkin)
 				water()
 			if  e == None:
 				check_positions.insert(0,pos)
+				till_()
 				plant(Entities.Pumpkin)
 				water()
 			if not can_harvest():

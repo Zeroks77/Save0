@@ -46,9 +46,8 @@ def farm_wood():
 	else:
 		plant_row(Items.Wood)
 	
-def farm_cati():
-	plant_field(Items.Cactus)
-	cactus_measure()
+def farm_cati(): 
+	Cactus_Cycle()
 	
 def farm_dino():
 	dino()
