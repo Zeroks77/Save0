@@ -1,46 +1,33 @@
-def cactus_measure(): 
-	world_size = get_world_size()
-	
-	def grid_sorted(grid):
-		for i in range(len(grid)):
-			for j in range(len(grid)):
-				if not in_world(i+1,j+1): 
-					continue
-				if  grid[i][j] > grid[i+1][j] or grid[i][j] > grid[i][j]+1:
-					return False		
-		return True
-	def in_world(x,y):
-		x_in_world = 0 <= x and x <= world_size -1
-		y_in_world = 0 <= y and y <= world_size -1
-		return  (x_in_world and y_in_world)
- 
-	def grid_dimentional():
-		grid = []
-		for j in range(world_size):
-			row = []
-			for i in range(world_size):
-				row.append([])
-			grid.append(row)
-		return grid
-		
-	
-	grid = grid_dimentional()	
-	for i in range(len(grid)):
-		for j in range(len(grid)):
-			move_to(i,j) 
-			grid[i][j] = measure()
-			if grid[i][j] == None:				return
-	a = 0
-	while not grid_sorted(grid):
-		for i in range(len(grid)):
-			for j in range(len(grid)):
-				if in_world(i+1,j) and grid[i][j] > grid[i+1][j]:
-					move_to(i,j)
-					swap(East)
-					grid[i][j], grid[i+1][j] = grid[i+1][j], grid[i][j]
-				if in_world(i,j+1) and grid[i][j] > grid[i][j+1]:
-					move_to(i,j)					swap(North)
-					grid[i][j], grid[i][j+1] = grid[i][j+1], grid[i][j]
-	move_to(0,0)
+def Cactus_Cycle(a = 1):
+	Size = get_world_size()
+	if num_items(Items.Cactus_Seed) < Size * Size: 
+		return
+	for i in range(a):
+		Cacti_Sort = 1
+		Cactus_Cycle_Count = Size
+		for i in range(Size):
+			for i in range(Size):
+				plant(Entities.Cactus)
+				move(North)
+			move(East)
+		while Cacti_Sort > 0:
+			Cacti_Sort = 0
+			for i in range(Size):
+				for i in range(Size):
+					if Cactus_Cycle_Count > get_pos_x():
+						if measure() > measure(North) and get_pos_y() != Size - 1:
+							swap(North)
+							Cacti_Sort = Cacti_Sort + 1
+						if measure() > measure(East) and get_pos_x() != Size - 1:
+							swap(East)
+							Cacti_Sort = Cacti_Sort + 1
+						if measure() < measure(South) and get_pos_y() != 0:
+							swap(South)
+							Cacti_Sort = Cacti_Sort + 1
+						if measure() < measure(West) and get_pos_x() != 0:
+							swap(West)
+							Cacti_Sort = Cacti_Sort + 1
+					move(North)
+				move(East)
+			Cactus_Cycle_Count -= 1
 	harvest()
-		
